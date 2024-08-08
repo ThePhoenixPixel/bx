@@ -56,13 +56,13 @@ impl Bx {
     }
 
     pub fn extract_filename_from_url(url: &str) -> Option<String> {
-        return Option::from(
+        Option::from(
             match url.rsplit('/').next() {
                 Some(file_name) => file_name,
                 None => return None,
             }
             .to_string(),
-        );
+        )
     }
 
     pub fn extract_filename_from_pathbuf(path: &PathBuf) -> Option<String> {

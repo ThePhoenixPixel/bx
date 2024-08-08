@@ -9,10 +9,10 @@ pub struct Address {
 
 impl Address {
     pub fn new(ip: &String, port: &u32) -> Address {
-        return Address {
+        Address {
             ip: ip.clone(),
             port: port.clone(),
-        };
+        }
     }
 
     pub fn get_ip(&self) -> String {

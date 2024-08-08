@@ -21,7 +21,12 @@ impl Url {
     }
 
     pub fn get(&self) -> String {
-        format!("{}://{}/{}", &self.schema.to_string(), &self.address.to_string(), &self.url)
+        format!(
+            "{}://{}/{}",
+            &self.schema.to_string(),
+            &self.address.to_string(),
+            &self.url
+        )
     }
 
     pub fn push(&mut self, str: &str) {
@@ -38,9 +43,7 @@ impl Url {
 
     pub async fn post<T: Serialize>(&self, body: &T) -> Result<Response, Error> {
         let client = Client::new();
-        return client.post(&self.get())
-            .json(&body)
-            .send().await;
+        client.post(&self.get()).json(&body).send().await
     }
 }
 
@@ -53,9 +56,9 @@ pub enum UrlSchema {
 
 impl UrlSchema {
     pub fn to_string(&self) -> String {
-        return match self {
+        match self {
             UrlSchema::Http => String::from("http"),
             UrlSchema::Https => String::from("https"),
-        };
+        }
     }
 }
