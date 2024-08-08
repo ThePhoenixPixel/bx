@@ -1,11 +1,14 @@
 use std::error::Error;
-use std::{fs, io};
 use std::fs::File;
 use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::time::Duration;
+use std::{fs, io};
 
 pub mod address;
+pub mod date;
+pub mod month;
+pub mod time;
 pub mod url;
 
 pub struct Bx;
@@ -58,7 +61,7 @@ impl Bx {
                 Some(file_name) => file_name,
                 None => return None,
             }
-                .to_string(),
+            .to_string(),
         );
     }
 
@@ -82,10 +85,7 @@ impl Bx {
         String::new()
     }
 
-    pub async fn download_file(
-        url: &str,
-        file_path: &PathBuf,
-    ) -> Result<(), Box<dyn Error>> {
+    pub async fn download_file(url: &str, file_path: &PathBuf) -> Result<(), Box<dyn Error>> {
         // url = http://domain.com/test.download
         // file_path = folder/file.test
         if file_path.exists() {
