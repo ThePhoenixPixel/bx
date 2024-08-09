@@ -61,7 +61,7 @@ impl Address {
         format!("{}:{}", self.get_ip(), self.get_port()).to_string()
     }
 
-    pub fn get_local() -> Address {
+    pub fn get_local_ipv4() -> Address {
         Address {
             ip: "127.0.0.1".to_string(),
             port: 0,

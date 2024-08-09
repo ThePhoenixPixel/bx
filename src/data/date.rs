@@ -1,7 +1,8 @@
+use chrono::Datelike;
 use serde::{Deserialize, Serialize};
 
-use crate::month::Month;
-use crate::time::Time;
+use crate::data::month::Month;
+use crate::data::time::Time;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Date {
@@ -32,7 +33,7 @@ impl Date {
                 }
             }
         };
-        if day < *1 || day > &days_in_month {
+        if day < &1.clone() || day > &days_in_month {
             return Err("Invalid day for the given month".to_string());
         }
 
@@ -100,7 +101,17 @@ impl Date {
     }
 
     // check is leap year
-    fn is_leap_year(year: &u32) -> bool {
+    pub fn is_leap_year(year: &u32) -> bool {
         (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
+    }
+    
+    pub fn now() -> Self {
+        let now = chrono::Local::now();
+        Self {
+            day: now.day() as u8,
+            month: Month::now(),
+            year: now.year() as u32,
+            time: Time::now(),
+        }
     }
 }

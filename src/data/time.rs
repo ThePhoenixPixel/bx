@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::fmt;
+use chrono::Timelike;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Time {
@@ -117,6 +118,16 @@ impl Time {
 
     pub fn is_later_than(&self, other: &Time) -> bool {
         self.to_seconds() > other.to_seconds()
+    }
+
+    // get a now time obj.
+    pub fn now() -> Self {
+        let now = chrono::Local::now();
+        Self {
+            seconds: now.second(),
+            minutes: now.minute(),
+            hours: now.hour(),
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::fmt;
+use chrono::Datelike;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Month {
@@ -90,6 +91,11 @@ impl Month {
             12 => Some(Month::DECEMBER),
             _ => None,
         }
+    }
+
+    pub fn now() -> Self {
+        let now = chrono::Local::now();
+        Self::from_number(now.month() as u8).expect("Error from 'BX' lib error month")
     }
 }
 
