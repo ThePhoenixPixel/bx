@@ -1,5 +1,8 @@
+use serde::{Deserialize, Serialize};
+
 use crate::network::domain::Domain;
 
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Email {
     local: String,
     domain: Domain,
