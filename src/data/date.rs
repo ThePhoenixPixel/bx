@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::data::month::Month;
 use crate::data::time::Time;
+use crate::network::address::Address;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Date {
@@ -10,6 +11,18 @@ pub struct Date {
     month: Month,
     year: u32,
     time: Time,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct LoginDate {
+    date: Date,
+    address: Address,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct LoginTime {
+    date: Date,
+    address: Address,
 }
 
 impl Date {
@@ -115,3 +128,56 @@ impl Date {
         }
     }
 }
+
+impl LoginDate {
+    pub fn new(date: &Date, address: &Address) -> LoginDate {
+        LoginDate {
+            date: date.clone(),
+            address: address.clone(),
+        }
+    }
+
+    pub fn get_date(&self) -> Date {
+        self.date.clone()
+    }
+
+    pub fn get_address(&self) -> Address {
+        self.address.clone()
+    }
+
+    pub fn set_date(&mut self, date: &Date) {
+        self.date = date.clone();
+    }
+
+    pub fn set_address(&mut self, address: &Address) {
+        self.address = address.clone();
+    }
+
+}
+
+impl LoginTime {
+    pub fn new(date: &Date, address: &Address) -> LoginTime {
+        LoginTime {
+            date: date.clone(),
+            address: address.clone(),
+        }
+    }
+
+    pub fn get_date(&self) -> Date {
+        self.date.clone()
+    }
+
+    pub fn get_address(&self) -> Address {
+        self.address.clone()
+    }
+
+    pub fn set_date(&mut self, date: &Date) {
+        self.date = date.clone();
+    }
+
+    pub fn set_address(&mut self, address: &Address) {
+        self.address = address.clone();
+    }
+}
+
+
